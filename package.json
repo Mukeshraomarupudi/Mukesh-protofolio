@@ -1,0 +1,12 @@
+{
+  "name": "mukesh-portfolio",
+  "version": "1.0.0",
+  "description": "Mukesh Rao Marupudi - Data Engineer & AI/ML Developer Portfolio",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["portfolio", "data-engineer", "ml-developer"],
+  "author": "Mukesh Rao Marupudi",
+  "license": "MIT"
+}
