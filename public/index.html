@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mukesh Rao Marupudi — Data Engineer & AI/ML Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0C0C0F;
+    --surface: #141417;
+    --surface2: #1A1A1F;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --text: #F0EEE8;
+    --muted: #888785;
+    --accent: #5DCAA5;
+    --accent-dim: rgba(93,202,165,0.12);
+    --accent2: #AFA9EC;
+    --accent2-dim: rgba(175,169,236,0.12);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    background: rgba(12,12,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 2.5rem 3rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .hero-inner { width: 100%; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent-dim);
+    border: 0.5px solid rgba(93,202,165,0.25);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 1.75rem;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  h1 .dim { color: var(--muted); font-weight: 300; }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #04342C;
+    border: none;
+  }
+  .btn-primary:hover { background: #7FD8BA; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 0.5px solid var(--border-hover);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    padding-top: 2rem;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat-item {}
+  .stat-num {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.03em; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2.5rem; max-width: 960px; margin: 0 auto; }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .skill-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+  .skill-card:hover { background: var(--surface2); }
+  .skill-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-dim);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 16px;
+  }
+  .skill-icon.purple { background: var(--accent2-dim); }
+  .skill-icon svg { width: 18px; height: 18px; }
+  .skill-title { font-size: 14px; font-weight: 500; margin-bottom: 0.5rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+  .tag {
+    font-size: 11px;
+    font-family: var(--mono);
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid var(--border);
+    color: var(--muted);
+    padding: 3px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 0.5px;
+    background: var(--border);
+  }
+  .timeline-item {
+    padding-left: 2rem;
+    padding-bottom: 2.5rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .timeline-meta {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+    margin-bottom: 0.5rem;
+  }
+  .timeline-company {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-role { font-size: 17px; font-weight: 500; }
+  .timeline-date {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .timeline-desc { font-size: 14px; color: var(--muted); margin-top: 0.75rem; line-height: 1.7; }
+  .timeline-bullets { list-style: none; margin-top: 0.75rem; }
+  .timeline-bullets li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+    line-height: 1.6;
+  }
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 1px;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+  .project-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface2);
+  }
+  .project-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+  .project-title { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 0.5px solid rgba(93,202,165,0.2);
+    letter-spacing: 0.03em;
+  }
+  .stack-tag.purple {
+    background: var(--accent2-dim);
+    color: var(--accent2);
+    border-color: rgba(175,169,236,0.2);
+  }
+
+  /* CERTS */
+  .certs-list { display: flex; flex-direction: column; gap: 1px; }
+  .cert-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+    border-left: 2px solid var(--accent);
+    transition: background 0.2s;
+  }
+  .cert-item:hover { background: var(--surface2); }
+  .cert-name { font-size: 14px; font-weight: 500; }
+  .cert-org { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .cert-dot {
+    width: 28px; height: 28px; min-width: 28px;
+    background: var(--accent-dim);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+  }
+  .contact-inner h2 { margin-bottom: 0.75rem; }
+  .contact-sub { color: var(--muted); margin-bottom: 2rem; }
+  .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    text-decoration: none;
+    border: 0.5px solid var(--border-hover);
+    color: var(--text);
+    font-family: var(--mono);
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    border-top: 0.5px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1.25rem; }
+    section { padding: 3.5rem 1.25rem; }
+    .hero { padding: 5rem 1.25rem 2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .contact-inner { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">mmr.dev</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-inner">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1>
+      Mukesh Rao<br>
+      <span class="dim">Marupudi</span>
+    </h1>
+    <p class="hero-sub">
+      Data Engineer · AI/ML Developer · Python Backend. Building intelligent data systems and deep learning solutions at Bharat Electronics Limited, Bengaluru.
+    </p>
+    <div class="hero-ctas">
+      <a href="mailto:mmukeshrao71@gmail.com" class="btn btn-primary">Get in touch</a>
+      <a href="https://www.linkedin.com/in/mukesh-raomarupudi-b54950251" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">1.5+</div>
+        <div class="stat-label">Years at BEL</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">ML Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">7.84</div>
+        <div class="stat-label">CGPA — MITS</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-eyebrow">Core competencies</p>
+  <h2>What I work with</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent)"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      </div>
+      <div class="skill-title">Python & Backend</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">Django</span><span class="tag">Flask</span><span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">OOP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent)"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </div>
+      <div class="skill-title">Databases</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">SQLAlchemy</span><span class="tag">Django ORM</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent2)"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="skill-title">ML & Deep Learning</div>
+      <div class="skill-tags">
+        <span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">Scikit-learn</span><span class="tag">CNN</span><span class="tag">YOLOv8</span><span class="tag">ResNet</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent2)"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      </div>
+      <div class="skill-title">Data Engineering & Analytics</div>
+      <div class="skill-tags">
+        <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">EDA</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="skill-title">Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="tag">AWS basics</span><span class="tag">GCP</span><span class="tag">Git/GitHub</span><span class="tag">CI/CD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--accent)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="skill-title">NLP & LLMs</div>
+      <div class="skill-tags">
+        <span class="tag">Text-to-Speech</span><span class="tag">NLP pipelines</span><span class="tag">LLM familiarity</span><span class="tag">pyttsx3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-eyebrow">Career</p>
+  <h2>Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <div>
+          <div class="timeline-company">Bharat Electronics Limited</div>
+          <div class="timeline-role">Graduate Apprentice Engineer</div>
+        </div>
+        <div class="timeline-date">Jan 2025 – Jan 2026 · Bengaluru</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Developed and optimized Python scripts and backend automation modules, reducing manual effort across data pipelines and improving operational efficiency.</li>
+        <li>Wrote complex SQL queries for data retrieval, aggregation, and schema management across MySQL/PostgreSQL databases, enabling accurate reporting for stakeholders.</li>
+        <li>Built scalable data pipelines using Pandas and NumPy; delivered dashboards supporting data-driven decisions across engineering and management teams.</li>
+        <li>Conducted system verification and manual testing to validate data integrity and align deliverables with software quality standards.</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-meta">
+        <div>
+          <div class="timeline-company">NIT Puducherry</div>
+          <div class="timeline-role">Deep Learning Intern</div>
+        </div>
+        <div class="timeline-date">Jan 2024 – Apr 2024 · Puducherry</div>
+      </div>
+      <ul class="timeline-bullets">
+        <li>Designed an end-to-end Tea Leaf Disease Detection system using CNN architectures (MobileNet, ResNet) and YOLOv8 for real-time multi-class image classification.</li>
+        <li>Executed a comprehensive image preprocessing and augmentation pipeline to boost model generalization across diverse agricultural datasets.</li>
+        <li>Trained and evaluated models using TensorFlow and Keras; assessed performance with confusion matrices, F1-scores, and precision-recall metrics.</li>
+        <li>Authored technical documentation contributing to publication-ready outputs for faculty review.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-eyebrow">Work</p>
+  <h2>Selected projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-year">Jan – Apr 2024</div>
+      <div class="project-title">Tea Leaf Disease Detection</div>
+      <div class="project-desc">End-to-end deep learning pipeline to detect and classify multiple tea leaf diseases using CNN architectures and YOLOv8 for real-time disease localization on agricultural image datasets.</div>
+      <div class="project-stack">
+        <span class="stack-tag">YOLOv8</span>
+        <span class="stack-tag">CNN</span>
+        <span class="stack-tag">ResNet</span>
+        <span class="stack-tag">TensorFlow</span>
+        <span class="stack-tag">OpenCV</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-year">Apr – Dec 2024</div>
+      <div class="project-title">Heart Disease Prediction</div>
+      <div class="project-desc">Clinically-inspired predictive ML model using Logistic Regression on real patient datasets with thorough feature engineering, EDA, and ROC-AUC validation for cardiovascular risk identification.</div>
+      <div class="project-stack">
+        <span class="stack-tag purple">Scikit-learn</span>
+        <span class="stack-tag purple">Logistic Reg.</span>
+        <span class="stack-tag purple">Pandas</span>
+        <span class="stack-tag purple">Seaborn</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-year">Jul – Aug 2022</div>
+      <div class="project-title">Student Performance EDA</div>
+      <div class="project-desc">Full EDA pipeline covering ingestion, cleaning, outlier detection, and statistical analysis. Built a rich visualization suite of histograms, heatmaps, and pair plots to surface hidden trends.</div>
+      <div class="project-stack">
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">Matplotlib</span>
+        <span class="stack-tag">Seaborn</span>
+        <span class="stack-tag">NumPy</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-year">Jul – Sep 2023</div>
+      <div class="project-title">Text-to-Speech NLP App</div>
+      <div class="project-desc">Python NLP application converting textual input to high-quality spoken audio using pyttsx3 with dynamic control over speech rate, volume, and voice — featuring a modular text preprocessing pipeline.</div>
+      <div class="project-stack">
+        <span class="stack-tag purple">pyttsx3</span>
+        <span class="stack-tag purple">NLP</span>
+        <span class="stack-tag purple">Python</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-eyebrow">Credentials</p>
+  <h2>Certifications</h2>
+  <div class="certs-list">
+    <div class="cert-item">
+      <div class="cert-dot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div>
+        <div class="cert-name">Microsoft Power BI Data Analyst</div>
+        <div class="cert-org">Microsoft</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div>
+        <div class="cert-name">Tea Leaf Disease Detection using Deep Learning Approaches</div>
+        <div class="cert-org">NIT Puducherry</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div>
+        <div class="cert-name">Python for Data Science</div>
+        <div class="cert-org">2022</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div>
+        <div class="cert-name">Data Science – Exploratory Data Analysis</div>
+        <div class="cert-org">Teach Nook</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-dot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div>
+        <div class="cert-name">Oracle Certified Badge</div>
+        <div class="cert-org">Oracle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow" style="text-align:center;">Let's talk</p>
+    <h2>Open to new opportunities</h2>
+    <p class="contact-sub">Looking for roles in Data Engineering, AI/ML, or Python backend development. Based in Bengaluru, India.</p>
+    <div class="contact-links">
+      <a href="mailto:mmukeshrao71@gmail.com" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        mmukeshrao71@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/mukesh-raomarupudi-b54950251" target="_blank" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="tel:+918688664827" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 8688664827
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built with HTML/CSS · Mukesh Rao Marupudi · Bengaluru, India
+</footer>
+
+</body>
+</html>
