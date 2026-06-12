@@ -4,6 +4,7 @@
   "description": "Mukesh Rao Marupudi - Data Engineer & AI/ML Developer Portfolio",
   "private": true,
   "scripts": {
+    "dev": "python3 -m http.server 3000 --directory public",
     "build": "echo 'Static site - no build needed'"
   },
   "keywords": ["portfolio", "data-engineer", "ml-developer"],
