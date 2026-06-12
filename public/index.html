@@ -375,9 +375,86 @@
     .hero-stats { gap: 1.5rem; }
     .contact-inner { padding: 2rem 1.25rem; }
   }
+
+  /* Email Popup */
+  .email-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 999;
+  }
+  .email-popup-overlay.show {
+    display: block;
+  }
+  .email-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    z-index: 1000;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+    min-width: 300px;
+  }
+  .email-popup.show {
+    display: flex;
+  }
+  .email-popup h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text);
+  }
+  .email-popup .email-text {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-dim);
+    border-radius: 8px;
+    border: 1px solid rgba(93, 202, 165, 0.3);
+    user-select: all;
+    cursor: pointer;
+  }
+  .email-popup button {
+    padding: 0.5rem 1rem;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  .email-popup button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
 </style>
 </head>
 <body>
+
+<!-- Email Popup -->
+<div id="emailPopupOverlay" class="email-popup-overlay"></div>
+<div id="emailPopup" class="email-popup">
+  <h3>Get In Touch</h3>
+  <div class="email-text" id="emailText">mmukeshrao71@gmail.com</div>
+  <button onclick="copyEmail()">Copy Email</button>
+  <button onclick="closeEmailPopup()">Close</button>
+</div>
 
 <nav>
   <span class="nav-logo">mmr.dev</span>
@@ -400,7 +477,7 @@
       AI/ML Engineer · Python Developer · Data Engineer · Data Analyst & Data Scientist. Building intelligent data systems and deep learning solutions at Bharat Electronics Limited, Bengaluru.
     </p>
     <div class="hero-ctas">
-      <a href="mailto:mmukeshrao71@gmail.com" class="btn btn-primary" title="mmukeshrao71@gmail.com">Get in touch</a>
+      <button onclick="openEmailPopup()" class="btn btn-primary" style="border: none; cursor: pointer;">Get in touch</button>
       <a href="https://www.linkedin.com/in/mukesh-rao-marupudi-b54950251/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
       <a href="https://github.com/Mukeshraomarupudi" target="_blank" class="btn btn-ghost">GitHub ↗</a>
     </div>
@@ -694,6 +771,40 @@
 <footer>
   Built with HTML/CSS · Mukesh Rao Marupudi · Bengaluru, India
 </footer>
+
+<script>
+function openEmailPopup() {
+  document.getElementById('emailPopup').classList.add('show');
+  document.getElementById('emailPopupOverlay').classList.add('show');
+}
+
+function closeEmailPopup() {
+  document.getElementById('emailPopup').classList.remove('show');
+  document.getElementById('emailPopupOverlay').classList.remove('show');
+}
+
+function copyEmail() {
+  const email = document.getElementById('emailText').textContent;
+  navigator.clipboard.writeText(email).then(() => {
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Copied!';
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 2000);
+  });
+}
+
+// Close popup when clicking overlay
+document.getElementById('emailPopupOverlay').addEventListener('click', closeEmailPopup);
+
+// Close popup on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeEmailPopup();
+  }
+});
+</script>
 
 </body>
 </html>
